@@ -147,7 +147,7 @@ def main():
             Cadastro.EmailContato = input("Digite seu email para contato: ")
             Cadastro.verificarDados("Telefone", input("Digite se número de Telefone para contato ((XX) 9XXXX-XXXX):"))
             Cadastro.RazaoSocial = input("Digite sua razão social: ")
-            Cadastro.verificarDados("CNPJ", "Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
+            Cadastro.verificarDados("CNPJ", input("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): "))
             Cadastro.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
         # Caso seja invalida, então vai recomeçar o cadastro.   
         else:
