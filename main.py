@@ -21,11 +21,11 @@ class Criar_Cadastro:
     Nome = None 
     CPF = None 
     Celular = None 
-    Data_Nascimento = None 
+    DataNascimento = None 
     
     # Informação Pessoa Jurídica
     NomeFantasia = None 
-    Razao_Social = None 
+    RazaoSocial = None 
     CNPJ = None 
     
     # Inicialização do Objeto
@@ -40,42 +40,48 @@ class Criar_Cadastro:
             print("Senha não é COMPATIVEL, digite novamente.")
 
     # verificar o tamanho e a quantidade de casas a ser digitadas. 
-def verificarDados(self, dados, valor):
-    if dados == "CPF":
-        padrao = re.compile(r'^\d{3}\.\d{3}\.\d{3}\-\d{2}')  # Verifica se é XXX.XXX.XXX-XX
-        if padrao.match(valor):
-            self.CPF = valor
-        else:
-            self.verificarDados("CPF", input("CPF INVALIDO \nDigite seu CPF (XXX.XXX.XXX-XX): "))
-    
-    elif dados == "Telefone":
-        padrao = re.compile(r'^\(\d{2}\)\s9?\d{4}-\d{4}$')  # Verifica se é (XX) 9XXXX-XXXX
-        if padrao.match(valor):
-            self.TelefoneContato = valor
-        else:
-            self.verificarDados("Telefone", input("TELEFONE INVALIDO\nDigite telefone para contato ((XX) 9XXXX-XXXX):"))
-    
-    elif dados == "Celular":
-        padrao = re.compile(r'^\+55\s\d{2}\s\d{4,5}-\d{4}$')  # Verifica se é +XX XX 9XXXX-XXXX
-        if padrao.match(valor):
-            self.Celular = valor
-        else:
-            self.verificarDados("CELULAR", input("CELULAR INVALIDO\nDigite telefone para contato (+XX XX 9XXXX-XXXX):"))
-    
-    elif dados == "Data_Nascimento":
-        padrao = re.compile(r'\d{2}\/\d{2}\/\d{4}')  # Verifica se é XX/XX/XXXX
-        if padrao.match(valor):
-            self.Data_Nascimento = valor
-        else:
-            self.verificarDados("Data_Nascimento", input("DATA DE NASCIMENTO INVALIDA\nDigite o ano que você nasceu (DD/MM/AA): "))
-    
-    elif dados == "CEP":
-        padrao = re.compile(r'\d{5}\-\d{3}')  # Verifica se é XXXXX-XXX
-        if padrao.match(valor):
-            self.Endereco = valor
-        else:
-            self.verificarDados("CEP", input("CEP INVALIDO\nDigite seu CEP (XXXXX-XXX): "))
-
+    def verificarDados(self, dados, valor):
+        if dados == "CPF":
+            padrao = re.compile(r'^\d{3}\.\d{3}\.\d{3}\-\d{2}')  # Cria um padrão no formato (XXX.XXX.XXX-XX)
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.CPF = valor
+            else:
+                self.verificarDados("CPF", input("CPF INVALIDO \nDigite seu CPF (XXX.XXX.XXX-XX): "))
+        
+        elif dados == "Telefone":
+            padrao = re.compile(r'^\(\d{2}\)\s9?\d{4}-\d{4}$')  # Cria um padrão no formato (XX) 9XXXX-XXXX
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.TelefoneContato = valor
+            else:
+                self.verificarDados("Telefone", input("TELEFONE INVALIDO\nDigite telefone para contato ((XX) 9XXXX-XXXX):"))
+        
+        elif dados == "Celular":
+            padrao = re.compile(r'^\+55\s\d{2}\s\d{4,5}-\d{4}$')  # Cria um padrão no formato +XX XX 9XXXX-XXXX
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.Celular = valor
+            else:
+                self.verificarDados("CELULAR", input("CELULAR INVALIDO\nDigite telefone para contato (+XX XX 9XXXX-XXXX):"))
+        
+        elif dados == "Data_Nascimento":
+            padrao = re.compile(r'\d{2}\/\d{2}\/\d{4}')  # Cria um padrão no formato XX/XX/XXXX
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.DataNascimento = valor
+            else:
+                self.verificarDados("Data_Nascimento", input("DATA DE NASCIMENTO INVALIDA\nDigite o ano que você nasceu (DD/MM/AA): "))
+        
+        elif dados == "CEP":
+            padrao = re.compile(r'\d{5}\-\d{3}')  # Cria um padrão no formato XXXXX-XXX
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.Endereco = valor
+            else:
+                self.verificarDados("CEP", input("CEP INVALIDO\nDigite seu CEP (XXXXX-XXX): "))
+                
+        elif dados == "CNPJ":
+            padrao = re.compile(r'\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}') # Cria um padrão no formato XX.XXX.XXX/XXXX-XX
+            if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
+                self.CNPJ = valor 
+            else:
+                self.verificarSenha("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
 
     # Imprimir as informações
     def imprimirinfo(self, indice):
@@ -86,7 +92,7 @@ def verificarDados(self, dados, valor):
             print("Telefone para contato: " , self.TelefoneContato) 
             print("Celular para contato:" , self.Celular )  
             print("Nome do cliente: " , self.Nome ) 
-            print("Data de nascimento: " , self.Data_Nascimento )
+            print("Data de nascimento: " , self.DataNascimento )
             print("CPF:" , self.CPF)
             print("Endereço:" , self.Endereco ,"\n\n")
         else:
@@ -94,7 +100,7 @@ def verificarDados(self, dados, valor):
             print("Tipo de cadastro:" , self.TipoCadastro )   
             print("Email:" , self.EmailContato )
             print("Telefone para contato:" , self.TelefoneContato)
-            print("Razao socal:" , self.Razao_Social) 
+            print("Razao socal:" , self.RazaoSocial) 
             print("CNPJ:" , self.CNPJ, "\n\n" )
             
 # Retornar os usuarios existentes
@@ -139,10 +145,10 @@ def main():
         elif tipoCadastro.lower() == "juridica" or tipoCadastro.lower() == "juridico":
             Cadastro = Criar_Cadastro("juridica")
             Cadastro.EmailContato = input("Digite seu email para contato: ")
-            Cadastro.TelefoneContato = input("Digite seu Telefone de contato: ")
-            Cadastro.Razao_Social = input("Digite sua razão social: ")
-            Cadastro.CNPJ = input("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
-            Cadastro.Endereco = ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
+            Cadastro.verificarDados("Telefone", input("Digite telefone para contato ((XX) 9XXXX-XXXX) :"))
+            Cadastro.RazaoSocial = input("Digite sua razão social: ")
+            Cadastro.verificarSenha("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
+            Cadastro.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
         # Caso seja invalida, então vai recomeçar o cadastro.   
         else:
             print("RESPOSTA INVALIDA\n\n")
