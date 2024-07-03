@@ -1,4 +1,4 @@
-# BIBLIOTECAS
+  # BIBLIOTECAS
 import re 
 
 # VETOR PARA GUARDAR OBJETOS
@@ -94,13 +94,13 @@ class Criar_Cadastro:
             print("Nome do cliente: " , self.Nome ) 
             print("Data de nascimento: " , self.DataNascimento )
             print("CPF:" , self.CPF)
-            print("Endereço:" , self.Endereco ,"\n\n")
+            print("CEP:" , self.Endereco ,"\n\n")
         else:
             print(f"\n----INFORMAÇÕES DO CADASTRO #{indice+1}----")
             print("Tipo de cadastro:" , self.TipoCadastro )   
             print("Email:" , self.EmailContato )
             print("Telefone para contato:" , self.TelefoneContato)
-            print("Razao socal:" , self.RazaoSocial) 
+            print("Razao social:" , self.RazaoSocial) 
             print("CNPJ:" , self.CNPJ, "\n\n" )
             
 # Retornar os usuarios existentes
@@ -140,7 +140,7 @@ def main():
             Cadastro.Nome = input("Digite seu nome: ")
             Cadastro.verificarDados ("Data_Nascimento", input("Digite sua data de Nascimente (DD/MM/AA): "))
             Cadastro.verificarDados ("CPF", input("Digite seu CPF (XXX.XXX.XXX-XX): "))
-            Cadastro.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
+            Cadastro.verificarDados ("CEP", input("Digite o CEP da sua rua/residencia  ex:(XXXXX-XXX): "))
 
         elif tipoCadastro.lower() == "juridica" or tipoCadastro.lower() == "juridico":
             Cadastro = Criar_Cadastro("juridica")
