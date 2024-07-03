@@ -42,25 +42,25 @@ class Criar_Cadastro:
     # verificar o tamanho e a quantidade de casas a ser digitadas. 
     def verificarDados(self, dados, valor):
         if dados == "CPF":
-            padrao = re.compile(r'^\d{3}\.\d{3}\.\d{3}\-\d{2}')  # Cria um padrão no formato (XXX.XXX.XXX-XX)
+            padrao = re.compile(r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}')  # Cria um padrão no formato (XXX.XXX.XXX-XX)
             if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
                 self.CPF = valor
             else:
                 self.verificarDados("CPF", input("CPF INVALIDO \nDigite seu CPF (XXX.XXX.XXX-XX): "))
         
         elif dados == "Telefone":
-            padrao = re.compile(r'^\(\d{2}\)\s9?\d{4}-\d{4}$')  # Cria um padrão no formato (XX) 9XXXX-XXXX
+            padrao = re.compile(r'^\(\d{2}\)\s9?\d{4}-?\d{4}$')  # Cria um padrão no formato (XX) 9XXXX-XXXX
             if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
                 self.TelefoneContato = valor
             else:
-                self.verificarDados("Telefone", input("TELEFONE INVALIDO\nDigite telefone para contato ((XX) 9XXXX-XXXX):"))
+                self.verificarDados("Telefone", input("TELEFONE INVALIDO\nDigite seu número de Telefone para contato ((XX) 9XXXX-XXXX): "))
         
         elif dados == "Celular":
-            padrao = re.compile(r'^\+55\s\d{2}\s\d{4,5}-\d{4}$')  # Cria um padrão no formato +XX XX 9XXXX-XXXX
+            padrao = re.compile(r'^\+55\s\d{2}\s\d{4,5}-?\d{4}$')  # Cria um padrão no formato +XX XX 9XXXX-XXXX
             if padrao.match(valor): # Faz uma verificação se o valor está no mesmo padrão
                 self.Celular = valor
             else:
-                self.verificarDados("CELULAR", input("CELULAR INVALIDO\nDigite telefone para contato (+XX XX 9XXXX-XXXX):"))
+                self.verificarDados("Celular", input("CELULAR INVALIDO\nDigite seu número de Celular para contato (+XX XX 9XXXX-XXXX): "))
         
         elif dados == "Data_Nascimento":
             padrao = re.compile(r'\d{2}\/\d{2}\/\d{4}')  # Cria um padrão no formato XX/XX/XXXX
@@ -135,8 +135,8 @@ def main():
         if tipoCadastro.lower() == "fisica" or tipoCadastro.lower() == "fisico":
             Cadastro = Criar_Cadastro("fisica")
             Cadastro.EmailContato = input("Digite seu email para contato: ")
-            Cadastro.verificarDados ("Celular",  input("Digite Celular para contato (+XX XX 9XXXX-XXXX) :"))
-            Cadastro.verificarDados("Telefone", input("Digite telefone para contato ((XX) 9XXXX-XXXX) :"))
+            Cadastro.verificarDados ("Celular",  input("Digite seu número de Celular para contato (+XX XX 9XXXX-XXXX): "))
+            Cadastro.verificarDados("Telefone", input("Digite seu número de Telefone para contato ((XX) 9XXXX-XXXX): "))
             Cadastro.Nome = input("Digite seu nome: ")
             Cadastro.verificarDados ("Data_Nascimento", input("Digite sua data de Nascimente (DD/MM/AA): "))
             Cadastro.verificarDados ("CPF", input("Digite seu CPF (XXX.XXX.XXX-XX): "))
@@ -145,9 +145,9 @@ def main():
         elif tipoCadastro.lower() == "juridica" or tipoCadastro.lower() == "juridico":
             Cadastro = Criar_Cadastro("juridica")
             Cadastro.EmailContato = input("Digite seu email para contato: ")
-            Cadastro.verificarDados("Telefone", input("Digite telefone para contato ((XX) 9XXXX-XXXX) :"))
+            Cadastro.verificarDados("Telefone", input("Digite se número de Telefone para contato ((XX) 9XXXX-XXXX):"))
             Cadastro.RazaoSocial = input("Digite sua razão social: ")
-            Cadastro.verificarSenha("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
+            Cadastro.verificarDados("CNPJ", "Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
             Cadastro.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
         # Caso seja invalida, então vai recomeçar o cadastro.   
         else:
