@@ -1,5 +1,4 @@
-
-      # BIBLIOTECAS
+# BIBLIOTECAS
 import re 
 
 # Criação da classe "Cadastro"
