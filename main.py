@@ -1,8 +1,6 @@
-  # BIBLIOTECAS
-import re 
 
-# VETOR PARA GUARDAR OBJETOS
-usuarios=[] 
+      # BIBLIOTECAS
+import re 
 
 # Criação da classe "Cadastro"
 class Criar_Cadastro:
@@ -31,6 +29,27 @@ class Criar_Cadastro:
     # Inicialização do Objeto
     def __init__(self, cadastro):
          self.TipoCadastro = cadastro 
+    
+    def iniciarCadastro(self):
+        if self.TipoCadastro.lower() == "fisica" or self.TipoCadastro.lower() == "fisico":
+            self.verificarDados("Email", input("Digite um E-Mail (nome@dominio.com): "))
+            self.verificarDados("Celular",  input("Digite seu número de Celular para contato (+XX XX 9XXXX-XXXX): "))
+            self.verificarDados("Telefone", input("Digite seu número de Telefone para contato ((XX) 9XXXX-XXXX): "))
+            self.verificarDados("Nome", input("Digite seu Nome: "))
+            self.verificarDados("Data_Nascimento", input("Digite sua data de Nascimente (DD/MM/AA): "))
+            self.verificarDados("CPF", input("Digite seu CPF (XXX.XXX.XXX-XX): "))
+            self.verificarDados("CEP", input("Digite o CEP da sua rua/residencia  ex:(XXXXX-XXX): "))
+                
+        elif self.TipoCadastro.lower() == "juridica" or self.TipoCadastro.lower() == "juridico":
+            self.verificarDados("Email", input("Digite um E-Mail (nome@dominio.com): "))
+            self.verificarDados("Telefone", input("Digite se número de Telefone para contato ((XX) 9XXXX-XXXX):"))
+            self.verificarDados("RazaoSocial", input("Digite sua Razão Social: "))
+            self.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
+            self.verificarDados("CNPJ", input("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): "))
+        # Caso seja invalida, então vai recomeçar o cadastro. #   
+        else:
+            print("RESPOSTA INVALIDA\n\nDigite 'Fisica' para Pessoa Física. \nDigite 'Juridica' para Pessoa Juridica\nDigite: ")
+            self.iniciarCadastro()
     
     # Verificação da senha digitada.
     def verificarSenha(self, cSenha):
@@ -82,11 +101,29 @@ class Criar_Cadastro:
                 self.CNPJ = valor 
             else:
                 self.verificarSenha("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): ")
+        elif dados == "Nome":
+            if len(valor) > 1: # Verifica se o nome tem mais de um caractere
+                self.Nome = valor 
+            else: 
+                self.verificarDados("Nome", input("TAMANHO DO NOME É INVALIDO\nDigite seu Nome: "))
+                
+        elif dados == "Email":
+            padrao = re.compile(r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$') # Cria um padrão no formato nome@dominio.com
+            if padrao.match(valor.lower()): # Faz uma verificação se o valor está no mesmo padrão
+                self.EmailContato = valor 
+            else:
+                self.verificarDados("Email", input("EMAIL Invalido!\nDigite um E-Mail (nome@dominio.com): "))
+        
+        elif dados == "RazaoSocial":
+            if len(valor) > 0: # Verifica se a Razão Social não está vazia
+                self.RazaoSocial = valor 
+            else:
+                self.verificarDados("RazaoSocial", input("RAZAO SOCIAL INVALIDA\nDigite sua Razão Social: "))
 
     # Imprimir as informações
-    def imprimirinfo(self, indice):
+    def imprimirinfo(self):
         if self.TipoCadastro == "fisica" :
-            print(f"\n----INFORMAÇÕES DO CADASTRO #{indice+1}----")
+            print(f"\n---- | INFORMAÇÕES DO CADASTRO | ----")
             print("Tipo de Cadastro: " , self.TipoCadastro)
             print("Email:" , self.EmailContato ) 
             print("Telefone para contato: " , self.TelefoneContato) 
@@ -96,30 +133,21 @@ class Criar_Cadastro:
             print("CPF:" , self.CPF)
             print("CEP:" , self.Endereco ,"\n\n")
         else:
-            print(f"\n----INFORMAÇÕES DO CADASTRO #{indice+1}----")
+            print(f"\n---- | INFORMAÇÕES DO CADASTRO | ----")
             print("Tipo de cadastro:" , self.TipoCadastro )   
             print("Email:" , self.EmailContato )
             print("Telefone para contato:" , self.TelefoneContato)
             print("Razao social:" , self.RazaoSocial) 
             print("CNPJ:" , self.CNPJ, "\n\n" )
-            
-# Retornar os usuarios existentes
-def retornar_usuario ():    
-    for i in range (len(usuarios)):
-        usuarios[i].imprimirinfo(i)
 
 # Inicio do Programa
 def main():
-    PararCadastro = False
-    
-    # Enquanto o usuário não querer parar o cadastro vai acontecer o processo de cadastração
-    while not PararCadastro: 
-        Confirmar = input("Deseja começar um novo cadastro? (S/N): ")
+    while True: 
+        Confirmar = input("Deseja começar o cadastro? : ")
 
         # Verificar se o usuário quer continuar o cadastro
         if Confirmar.lower() == 'nao' or Confirmar.lower() == "n" or Confirmar.lower() == "não":
-           
-            retornar_usuario()
+            
             PararCadastro = True 
             break
         elif Confirmar.lower() == 'sim' or Confirmar.lower() == "s":
@@ -128,31 +156,10 @@ def main():
             print("Resposta Invalida! \n\n")
             continue
         
-        # Pergunta para o usuário qual o tipo de cadastro dele
-        tipoCadastro = input("Qual seu tipo de cadastro? \nDigite 'Fisica' para Pessoa Física. \nDigite 'Juridica' para Pessoa Juridica: ")
-        
-        # Verificar se o usuario quer se cadastrar como pessoa fisica ou juridica
-        if tipoCadastro.lower() == "fisica" or tipoCadastro.lower() == "fisico":
-            Cadastro = Criar_Cadastro("fisica")
-            Cadastro.EmailContato = input("Digite seu email para contato: ")
-            Cadastro.verificarDados ("Celular",  input("Digite seu número de Celular para contato (+XX XX 9XXXX-XXXX): "))
-            Cadastro.verificarDados("Telefone", input("Digite seu número de Telefone para contato ((XX) 9XXXX-XXXX): "))
-            Cadastro.Nome = input("Digite seu nome: ")
-            Cadastro.verificarDados ("Data_Nascimento", input("Digite sua data de Nascimente (DD/MM/AA): "))
-            Cadastro.verificarDados ("CPF", input("Digite seu CPF (XXX.XXX.XXX-XX): "))
-            Cadastro.verificarDados ("CEP", input("Digite o CEP da sua rua/residencia  ex:(XXXXX-XXX): "))
-
-        elif tipoCadastro.lower() == "juridica" or tipoCadastro.lower() == "juridico":
-            Cadastro = Criar_Cadastro("juridica")
-            Cadastro.EmailContato = input("Digite seu email para contato: ")
-            Cadastro.verificarDados("Telefone", input("Digite se número de Telefone para contato ((XX) 9XXXX-XXXX):"))
-            Cadastro.RazaoSocial = input("Digite sua razão social: ")
-            Cadastro.verificarDados("CNPJ", input("Digite seu CNPJ (XX.XXX.XXX/XXXX-XX): "))
-            Cadastro.verificarDados ("CEP", input("Digite seu CEP (XXXXX-XXX): "))
-        # Caso seja invalida, então vai recomeçar o cadastro.   
-        else:
-            print("RESPOSTA INVALIDA\n\n")
-            continue
+        # Iniciar o processo de Cadastro
+        TipoCadastro = input("Qual seu tipo de cadastro? \nDigite 'Fisica' para Pessoa Física. \nDigite 'Juridica' para Pessoa Juridica\nDigite: ")
+        Cadastro = Criar_Cadastro(TipoCadastro)
+        Cadastro.iniciarCadastro()
         
         # Caso a senha de confirmação não seja igual a senha proposta, então vai re-fazer
         while Cadastro.SenhaConfirmada != True:
@@ -160,7 +167,7 @@ def main():
             Cadastro.verificarSenha(input("Digite a senha novamente: "))
         
         print("PARABÉNS , cadastro realizado com sucesso!! \n")
-            
-        usuarios.append(Cadastro)
-
+        Cadastro.imprimirinfo()
+        
+        break
 main()
