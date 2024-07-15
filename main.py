@@ -142,7 +142,7 @@ class Criar_Cadastro:
 # Inicio do Programa
 def main():
     while True: 
-        Confirmar = input("Deseja começar o cadastro? : ")
+        Confirmar = input("Deseja começar o cadastro? (S/N): ")
 
         # Verificar se o usuário quer continuar o cadastro
         if Confirmar.lower() == 'nao' or Confirmar.lower() == "n" or Confirmar.lower() == "não":
