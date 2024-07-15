@@ -1,8 +1,8 @@
 # BIBLIOTECAS
 import re 
 
-# Criação da classe "Cadastro"
-class Criar_Cadastro:
+# Classe CriarCadastro
+class CriarCadastro:
     
     # Informação Sensível
     Senha = None
@@ -157,7 +157,7 @@ def main():
         
         # Iniciar o processo de Cadastro
         TipoCadastro = input("Qual seu tipo de cadastro? \nDigite 'Fisica' para Pessoa Física. \nDigite 'Juridica' para Pessoa Juridica\nDigite: ")
-        Cadastro = Criar_Cadastro(TipoCadastro)
+        Cadastro = CriarCadastro(TipoCadastro)
         Cadastro.iniciarCadastro()
         
         # Caso a senha de confirmação não seja igual a senha proposta, então vai re-fazer
