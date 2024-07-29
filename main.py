@@ -30,6 +30,7 @@ class CriarCadastro:
          self.TipoCadastro = cadastro 
     
     def iniciarCadastro(self):
+        print("\n"*99)
         if self.TipoCadastro.lower() == "fisica" or self.TipoCadastro.lower() == "fisico":
             self.verificarDados("Email", input("Digite um E-Mail (nome@dominio.com): "))
             self.verificarDados("Celular",  input("Digite seu número de Celular para contato (+XX XX 9XXXX-XXXX): "))
@@ -57,7 +58,7 @@ class CriarCadastro:
         else:
             print("Senha não é COMPATIVEL, digite novamente.")
 
-    # verificar o tamanho e a quantidade de casas a ser digitadas. 
+    # Verificar o tamanho e a quantidade de casas a ser digitadas. Função Recursiva 
     def verificarDados(self, dados, valor):
         if dados == "CPF":
             padrao = re.compile(r'^\d{3}\.?\d{3}\.?\d{3}\-?\d{2}')  # Cria um padrão no formato (XXX.XXX.XXX-XX)
@@ -146,8 +147,6 @@ def main():
 
         # Verificar se o usuário quer continuar o cadastro
         if Confirmar.lower() == 'nao' or Confirmar.lower() == "n" or Confirmar.lower() == "não":
-            
-            PararCadastro = True 
             break
         elif Confirmar.lower() == 'sim' or Confirmar.lower() == "s":
             print("CONTINUANDO...\n\n")
